@@ -1,0 +1,306 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap');
+
+:root {
+  --grass-a: #5aa62b;
+  --grass-b: #3f8a1e;
+  --red-dark: #7a1f1a;
+  --red: #b3271c;
+  --red-light: #d1372a;
+  --yellow-light: #ffe27a;
+  --yellow: #ffc23a;
+  --yellow-dark: #e8930f;
+  --brown: #6b2f13;
+  --cream: #fffaf0;
+  --heart: #e0281f;
+  --ok: #3f8a1e;
+  --radius: 18px;
+  --shadow-hard: 0 6px 0 rgba(0,0,0,0.28);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Nunito', sans-serif;
+  color: var(--brown);
+}
+
+body {
+  background-color: var(--grass-b);
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(255,255,255,0.05) 0, transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(0,0,0,0.08) 0, transparent 45%),
+    repeating-linear-gradient(115deg, rgba(255,255,255,0.035) 0 2px, transparent 2px 6px),
+    repeating-linear-gradient(25deg, rgba(0,0,0,0.045) 0 2px, transparent 2px 6px),
+    linear-gradient(180deg, var(--grass-a), var(--grass-b));
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 32px 16px 60px;
+}
+
+.screen { display: none; width: 100%; max-width: 480px; }
+.screen.active { display: block; animation: fadein .25s ease; }
+
+@keyframes fadein { from { opacity: 0; transform: translateY(6px);} to { opacity: 1; transform: translateY(0);} }
+
+/* ---------- Logo / title badge ---------- */
+.badge-circle {
+  background: radial-gradient(circle at 35% 30%, var(--red-light), var(--red) 60%, var(--red-dark) 100%);
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  width: 78%;
+  margin: 6px auto 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 10px 22px rgba(0,0,0,0.35), inset 0 -8px 18px rgba(0,0,0,0.25);
+}
+
+.badge-circle .title-line {
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.1rem, 11vw, 3.1rem);
+  line-height: 0.95;
+  color: var(--yellow-light);
+  -webkit-text-stroke: 3px var(--red-dark);
+  paint-order: stroke fill;
+  text-shadow: 0 4px 0 var(--red-dark);
+  letter-spacing: 1px;
+}
+.badge-circle .title-line.small { font-size: clamp(1.7rem, 9vw, 2.5rem); }
+
+.badge-circle.small-badge {
+  width: 60%;
+  margin-bottom: 18px;
+}
+.badge-circle.small-badge .title-line { font-size: clamp(1.7rem, 10vw, 2.5rem); }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: block;
+  width: 100%;
+  border: none;
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin-bottom: 16px;
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  cursor: pointer;
+  text-align: center;
+  box-shadow: var(--shadow-hard);
+  transition: transform .08s ease, box-shadow .08s ease;
+  position: relative;
+}
+.btn:active { transform: translateY(4px); box-shadow: 0 2px 0 rgba(0,0,0,0.28); }
+
+.btn-yellow {
+  background: linear-gradient(180deg, #ffe98a 0%, var(--yellow) 55%, var(--yellow-dark) 100%);
+  color: var(--brown);
+  border-bottom: 4px solid #b06e06;
+}
+.btn-red {
+  background: linear-gradient(180deg, var(--red-light) 0%, var(--red) 55%, var(--red-dark) 100%);
+  color: var(--yellow-light);
+  border-bottom: 4px solid #4d120e;
+}
+.btn-locked {
+  background: linear-gradient(180deg, #d9d9d9 0%, #b7b7b7 55%, #949494 100%);
+  color: #6b6b6b;
+  cursor: not-allowed;
+  border-bottom: 4px solid #6f6f6f;
+}
+.btn-locked:active { transform: none; box-shadow: var(--shadow-hard); }
+
+.btn .icon { margin-right: 10px; }
+
+/* ---------- Panel (Anleitung / white card) ---------- */
+.panel {
+  background: var(--cream);
+  border-radius: var(--radius);
+  padding: 24px 22px;
+  box-shadow: var(--shadow-hard);
+  margin-bottom: 20px;
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+.panel p { margin: 0 0 14px; }
+.panel p:last-child { margin-bottom: 0; }
+
+/* ---------- Hearts (lives) ---------- */
+.hearts-bar {
+  display: inline-flex;
+  gap: 6px;
+  background: linear-gradient(180deg, #ffe98a, var(--yellow) 70%, var(--yellow-dark));
+  padding: 10px 18px;
+  border-radius: 999px;
+  box-shadow: var(--shadow-hard);
+  margin-bottom: 18px;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+.hearts-bar .heart { transition: transform .15s ease, opacity .15s ease; }
+.hearts-bar .heart.lost { opacity: 0.25; transform: scale(0.7); }
+
+.top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.timer-chip {
+  background: var(--red);
+  color: var(--yellow-light);
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 700;
+  padding: 10px 16px;
+  border-radius: 999px;
+  box-shadow: var(--shadow-hard);
+  font-size: 1.15rem;
+  min-width: 68px;
+  text-align: center;
+}
+.timer-chip.warning { background: #8f1210; animation: pulse 1s infinite; }
+@keyframes pulse { 0%,100% { transform: scale(1);} 50% { transform: scale(1.06);} }
+
+/* ---------- Question card ---------- */
+.question-card {
+  background: var(--cream);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-hard);
+  padding: 22px 18px;
+  margin-bottom: 18px;
+}
+
+.clues-row {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.clue {
+  flex: 1 1 0;
+  min-width: 120px;
+  max-width: 190px;
+  text-align: center;
+}
+
+.clue-image-wrap {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #eee;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #e4dcc8;
+}
+.clue-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.clue-image-wrap .fallback {
+  font-size: 0.85rem;
+  color: #888;
+  padding: 6px;
+}
+
+.clue-hint {
+  margin-top: 8px;
+  display: inline-block;
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 5px 12px;
+  border-radius: 999px;
+  box-shadow: 0 3px 0 rgba(0,0,0,0.2);
+}
+.clue-hint.arrow { background: var(--yellow); color: var(--brown); }
+.clue-hint.plus { background: #a6e07a; color: #235012; }
+.clue-hint.strike { background: #f3a6a6; color: #6b1414; text-decoration: line-through; text-decoration-thickness: 2px; }
+
+.plus-sign {
+  align-self: center;
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 800;
+  font-size: 2rem;
+  color: var(--brown);
+  padding-top: 40px;
+}
+
+/* ---------- Answer input ---------- */
+.answer-input {
+  width: 100%;
+  padding: 16px 18px;
+  border-radius: 14px;
+  border: 3px solid var(--brown);
+  font-size: 1.15rem;
+  font-family: 'Nunito', sans-serif;
+  margin-bottom: 16px;
+  background: #fff;
+  color: var(--brown);
+}
+.answer-input:focus { outline: none; border-color: var(--red); }
+
+.feedback {
+  text-align: center;
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  min-height: 1.6em;
+  margin-bottom: 10px;
+}
+.feedback.correct { color: #1f6d10; }
+.feedback.wrong { color: var(--red-dark); }
+
+/* ---------- Progress dots on level select ---------- */
+.level-status {
+  font-size: 0.85rem;
+  font-weight: 600;
+  opacity: 0.85;
+}
+
+/* ---------- Overlay (game over / level complete) ---------- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 30, 10, 0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 50;
+}
+.overlay.active { display: flex; }
+.overlay-card {
+  background: var(--cream);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  max-width: 360px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 12px 0 rgba(0,0,0,0.3);
+}
+.overlay-card h2 {
+  font-family: 'Baloo 2', sans-serif;
+  color: var(--red);
+  margin-top: 0;
+}
+.overlay-card .big-emoji { font-size: 3rem; margin-bottom: 8px; }
+
+footer.note {
+  text-align: center;
+  color: rgba(255,255,255,0.75);
+  font-size: 0.8rem;
+  margin-top: 10px;
+}
