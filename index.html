@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rate das Bild!</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ======================= MAIN MENU ======================= -->
+  <section id="screen-main" class="screen active">
+    <div class="badge-circle">
+      <div class="title-line">RATE</div>
+      <div class="title-line small">DAS BILD!</div>
+    </div>
+    <button class="btn btn-yellow" id="btn-spielen">Spielen</button>
+    <button class="btn btn-yellow" id="btn-anleitung">Anleitung</button>
+    <button class="btn btn-red" id="btn-reset-main">Zurücksetzen</button>
+  </section>
+
+  <!-- ======================= SPIELEN (level select) ======================= -->
+  <section id="screen-spielen" class="screen">
+    <div class="badge-circle small-badge">
+      <div class="title-line">SPIELEN</div>
+    </div>
+    <button class="btn btn-yellow" id="btn-level-1">
+      <span class="icon">⭐</span>Level 1
+    </button>
+    <button class="btn btn-locked" id="btn-level-2">
+      <span class="icon">🔒</span>Level 2
+    </button>
+    <button class="btn btn-red" id="btn-back-main-1">Zurück</button>
+  </section>
+
+  <!-- ======================= ANLEITUNG ======================= -->
+  <section id="screen-anleitung" class="screen">
+    <div class="badge-circle small-badge">
+      <div class="title-line">ANLEITUNG</div>
+    </div>
+    <div class="panel">
+      <p>Willkommen bei <strong>Rate das Bild!</strong></p>
+      <p>Errate das Wort anhand der Bilder.</p>
+      <p>Gib deine Antwort ein und drücke auf <strong>Prüfen</strong>.</p>
+      <p>Bei einer falschen Antwort verlierst du ein Leben.</p>
+      <p>Du hast fünf Leben.</p>
+      <p>Wenn die Zeit abläuft, verlierst du ebenfalls ein Leben. Schließe ein Level ab, um das nächste Level freizuschalten.</p>
+    </div>
+    <button class="btn btn-red" id="btn-back-main-2">Zurück</button>
+  </section>
+
+  <!-- ======================= GAME SCREEN ======================= -->
+  <section id="screen-game" class="screen">
+    <div class="top-row">
+      <div class="hearts-bar" id="hearts-bar"></div>
+      <div class="timer-chip" id="timer-chip" style="display:none;"></div>
+    </div>
+
+    <div class="question-card">
+      <div class="clues-row" id="clues-row"></div>
+    </div>
+
+    <div class="feedback" id="feedback"></div>
+
+    <input type="text" class="answer-input" id="answer-input" placeholder="Deine Antwort" autocomplete="off">
+    <button class="btn btn-yellow" id="btn-check">Prüfen</button>
+    <button class="btn btn-red" id="btn-quit-game">Zurück zum Menü</button>
+  </section>
+
+  <!-- ======================= OVERLAYS ======================= -->
+  <div class="overlay" id="overlay-levelcomplete">
+    <div class="overlay-card">
+      <div class="big-emoji">🎉</div>
+      <h2>Level geschafft!</h2>
+      <p id="levelcomplete-text">Du hast das Level abgeschlossen.</p>
+      <button class="btn btn-yellow" id="btn-lc-continue">Weiter</button>
+    </div>
+  </div>
+
+  <div class="overlay" id="overlay-gameover">
+    <div class="overlay-card">
+      <div class="big-emoji">💔</div>
+      <h2>Keine Leben mehr!</h2>
+      <p>Du startest dieses Level von vorne.</p>
+      <button class="btn btn-red" id="btn-go-restart">Nochmal versuchen</button>
+    </div>
+  </div>
+
+  <footer class="note">Rate das Bild! — Deutsch lernen mit Bildern</footer>
+
+  <script src="js/questions.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
